@@ -1,11 +1,11 @@
-//Obteniendo ID de los datos introducidos por teclado
+//Getting IDs entered through keyboard
 const inputName = document.getElementById("name");
 const inputLastName = document.getElementById("lastname");
 const inputMatricula = document.getElementById("matricula");
 const inputPhone = document.getElementById("phone");
 const inputEmail = document.getElementById("email");
 
-//Expresiones Regulares
+//Regular Expressions
 let RegExpFirstName = /[^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
 let RegExpLastName = /[^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
 let RegExpMatricula = /^\d{8}$/;
@@ -27,7 +27,7 @@ function CreateCurriculum() {
     const valueEmail = inputEmail.value;
     
     
-    //Creación contenedor de información
+    //Creation of information container
     const mainContainer = document.getElementById("contact-container");
 
     
@@ -105,7 +105,7 @@ function CreateCurriculum() {
     })
 
     
-    //Añadiendo relaciones padre e hijo mediante el DOM
+    //Adding parent and child relationships with DOM
     divCol.appendChild(divCard1);
     divCard1.appendChild(divCard2);
     divCard2.appendChild(h5);
@@ -176,7 +176,7 @@ function Validate() {
   const valuePhone = inputPhone.value;
   const valueEmail = inputEmail.value;
   
-  //Validación de Expresiones Regulares
+  //Regular Expressions validation
   let firstnameOK = RegExpFirstName.test(valueName);
   let lastnameOK = RegExpLastName.test(valueLastName);
   let matriculaOK = RegExpMatricula.test(valueMatricula);
@@ -187,7 +187,6 @@ function Validate() {
 
   if (valueName == "" || valueName == null || valueName == undefined || firstnameOK === false) {
     isValid = false;
-    //alert("!!!NOMBRE VACÍO O INVÁLIDO!!!(No se aceptan caracteres especiales)");
     toastr.error("No se aceptan caracteres especiales.", "!!!NOMBRE VACÍO O INVÁLIDO!!!", {timeOut: 4000});
     inputName.classList.remove("input-success");
     inputName.classList.add("input-error");
@@ -200,7 +199,6 @@ function Validate() {
 
   if (valueLastName == "" || valueLastName == null || valueLastName == undefined || lastnameOK === false){
     isValid = false;
-    //alert("!!!APELLIDO VACÍO O INVÁLIDO!!!(No se aceptan caracteres especiales)");
     toastr.error("No se aceptan caracteres especiales.", "!!!APELLIDO VACÍO O INVÁLIDO!!!", {timeOut: 4000});
     inputLastName.classList.add("input-error");
     inputLastName.classList.remove("input-success");
@@ -213,7 +211,6 @@ function Validate() {
 
   if (valueMatricula == "" || valueMatricula == null || valueMatricula == undefined || matriculaOK === false) {
     isValid = false;
-    //alert("!!!MATRÍCULA VACÍA O INVÁLIDA!!!Formato requerido: ####-####");
     toastr.error("Formato requerido: ####-####", "!!!MATRÍCULA VACÍA O INVÁLIDA!!!", {timeOut: 4000});
     inputMatricula.classList.add("input-error");
     inputMatricula.classList.remove("input-success");
@@ -227,7 +224,6 @@ function Validate() {
 
   if (valuePhone == "" || valuePhone == null || valuePhone == undefined || phoneOK === false) {
     isValid = false;
-    //alert("!!!TELÉFONO VACÍO O INVÁLIDO!!! Formato requerido:(###)-###-####");
     toastr.error("Formato requerido:(###)-###-####", "!!!TELÉFONO VACÍO O INVÁLIDO!!!", {timeOut: 4000});
     inputPhone.classList.add("input-error");
     inputPhone.classList.remove("input-success");
@@ -240,7 +236,6 @@ function Validate() {
 
   if (valueEmail == "" || valueEmail == null || valueEmail == undefined || emailOK === false) {
     isValid = false;
-    //alert("!!!CORREO VACÍO O INVÁLIDO!!! Formato requerido: #@gmail.com");
     toastr.error("Formato requerido: #@gmail.com", "!!!CORREO VACÍO O INVÁLIDO!!!", {timeOut: 4000});
     inputEmail.classList.add("input-error");
     inputEmail.classList.remove("input-success");
@@ -256,5 +251,5 @@ function Validate() {
 }
 
 function Info(){
-  toastr.info("Estudiante: Amín Jesús Báez Espinosa Asignatura: Programación Web Maestro: Luis Soto Alias: EL MEJOR", {timeOut: 8000});
+  toastr.info("Author: Amín Jesús Báez Espinosa", {timeOut: 8000});
 }
