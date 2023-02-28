@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Estudiantes</title>
+    <link rel="stylesheet" href="./assets/css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/lib/toast/toastr.css">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <div class="card-header bg-black text-light">
+                        <h4 class="text-center">Registro de estudiantes</h4>
+                    </div>
+                    <div class="card-body bg-dark text-light">
+                        <div class="card-title">
+                            <h4 class="text-center">Complete toda la información</h4>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombres:</label>
+                            <input type="text" class="form-control" id="name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="lastname" class="form-label">Apellidos:</label>
+                            <input type="text" class="form-control" id="lastname">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="matricula" class="form-label">Matrícula:</label>
+                            <input type="text" class="form-control" id="matricula">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Teléfono:</label>
+                            <input type="text" class="form-control" id="phone">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo:</label>
+                            <input type="text" class="form-control" id="email">
+                        </div>
+
+
+
+
+                        <div>
+                            <button onclick="Info()" type="button"
+                                class="btn btn-primary float-start me-2">Info</button>
+                            <button onclick="CreateCurriculum()" type="button"
+                                class="btn btn-success float-end">Enviar</button>
+                            <button onclick="Clear()" type="button"
+                                class="btn btn-warning float-end me-2">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3" id="contact-container">
+
+
+
+
+            
+            <script src="./assets/js/lib/jquery/jquery-3.6.0.min.js"></script>
+            <script src="./assets/js/lib/toast/toastr.min.js"></script>
+            <script src="./assets/js/site/index/index.js"></script>
+</body>
+
+</html>
+
+<!--Author:Amín Báez-->
