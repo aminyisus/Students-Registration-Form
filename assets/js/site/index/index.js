@@ -2,15 +2,15 @@
 const inputName = document.getElementById("name");
 const inputLastName = document.getElementById("lastname");
 const inputMatricula = document.getElementById("matricula");
-const inputPhone = document.getElementById("phone");
-const inputEmail = document.getElementById("email");
+const inputMateria = document.getElementById("materia");
+const inputNota = document.getElementById("nota");
 
 //Regular Expressions
-let RegExpFirstName = /[^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
-let RegExpLastName = /[^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\-\/\<\>\=\@\[\]\\\^\_\{\}\|\~]+/;
-let RegExpMatricula = /^\d{8}$/;
-let RegExpPhone = /(?:^\([0]?[1-9]{2}\)|^[0]?[1-9]{2}[\.-\s]?)[9]?[1-9]\d{3}[\.-\s]?\d{4}$/;
-let RegExpEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+let RegExpFirstName = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+(?:['\s][a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+)*$/;
+let RegExpLastName = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+(?:['\s][a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+)*$/;
+let RegExpMatricula = /^[0-9-]+$/;
+let RegExpMateria = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ0-9]+(?:['\s][a-zA-ZáéíóúÁÉÍÓÚüÜñÑ0-9]+)*$/;
+let RegExpNota = /^(?:100(?:\.0{1,2})?|\d{1,2}(?:\.\d{1,2})?)$/;
 
 
 
@@ -23,113 +23,87 @@ function CreateCurriculum() {
     const valueName = inputName.value;
     const valueLastName = inputLastName.value;
     const valueMatricula = inputMatricula.value;
-    const valuePhone = inputPhone.value;
-    const valueEmail = inputEmail.value;
+    const valueMateria = inputMateria.value;
+    const valueNota = inputNota.value;
     
     
     //Creation of information container
     const mainContainer = document.getElementById("contact-container");
 
+    const tbody = document.getElementById("tbody");
     
-    const divCol = document.createElement("div");
-    divCol.setAttribute("class", "col-4 mt-2 mb-2");
 
-    const divCard1 = document.createElement("div");
-    divCard1.setAttribute("class", "card mt-2 mb-2 bg-dark");
+    const tr = document.createElement("tr");
+    tr.setAttribute("class", "bg-dark text-light");
 
-    const divCard2 = document.createElement("div");
-    divCard2.setAttribute("class", "card-header bg-primary text-white");
+    const tdNombre = document.createElement("td");
 
+    const tdApellido = document.createElement("td");
 
-    const h5 = document.createElement("h5");
-    h5.setAttribute("class", "text-center fw-bold");
-    h5.innerText = "Registro de Estudiante-" + valueName;
+    const tdMatricula = document.createElement("td");
 
+    const tdMateria = document.createElement("td");
 
-    const divCardBody = document.createElement("div");
-    divCardBody.setAttribute("class", "card-body text-white");
+    const tdNota = document.createElement("td");
 
-    const ul = document.createElement("ul");
-    ul.setAttribute("class", "list-group list-group-flush");
+    
 
-    const liNombre = document.createElement("h5");
-    liNombre.setAttribute("class", "mb-4 fw-bold");
-    liNombre.innerText = "Nombres:";
+    
+    
 
     const vaNombre = document.createElement("h6");
-    vaNombre.setAttribute("class", "mb-4");
+    vaNombre.setAttribute("class", "mb-2 mt-2");
     vaNombre.innerText = valueName;
 
-    const liApellidos = document.createElement("h5");
-    liApellidos.setAttribute("class", "mb-4 fw-bold");
-    liApellidos.innerText = "Apellidos:";
-
     const vaLastName = document.createElement("h6");
-    vaLastName.setAttribute("class", "mb-4");
+    vaLastName.setAttribute("class", "mb-2 mt-2");
     vaLastName.innerText = valueLastName;
 
-    const liMatricula = document.createElement("h5");
-    liMatricula.setAttribute("class", "mb-4 fw-bold");
-    liMatricula.innerText = "Matrícula:";
-
     const vaMatricula = document.createElement("h6");
-    vaMatricula.setAttribute("class", "mb-4");
+    vaMatricula.setAttribute("class", "mb-2 mt-2");
     vaMatricula.innerText = valueMatricula;
 
-    const liTelefono = document.createElement("h5");
-    liTelefono.setAttribute("class", "mb-4 fw-bold");
-    liTelefono.innerText = "Telefono:";
+    const vaMateria = document.createElement("h6");
+    vaMateria.setAttribute("class", "mb-2 mt-2");
+    vaMateria.innerText = valueMateria;
 
-    const vaPhone = document.createElement("h6");
-    vaPhone.setAttribute("class", "mb-4");
-    vaPhone.innerText = valuePhone;
-
-    const liCorreo = document.createElement("h5");
-    liCorreo.setAttribute("class", "mb-4 fw-bold");
-    liCorreo.innerText = "Correo:";
-
-    const vaEmail = document.createElement("h6");
-    vaEmail.setAttribute("class", "mb-4");
-    vaEmail.innerText = valueEmail;
-
-
+    const vaNota = document.createElement("h6");
+    vaNota.setAttribute("class", "mb-2 mt-2");
+    vaNota.innerText = valueNota;
 
     const btnDelete = document.createElement("button");
-    btnDelete.setAttribute("class", "btn btn-danger float-end");
+    btnDelete.setAttribute("class", "btn bg-danger btn-danger");
     btnDelete.innerText = "Eliminar";
     btnDelete.addEventListener("click", function () {
       if (confirm("¿Estás seguro que deseas eliminar este registro?")) {
-        mainContainer.removeChild(divCol);
+        tbody.removeChild(tr);
         toastr.success("El registro ha sido eliminado correctamente.", {timeOut: 2000});
       }
     })
 
+
+    
+
     
     //Adding parent and child relationships with DOM
-    divCol.appendChild(divCard1);
-    divCard1.appendChild(divCard2);
-    divCard2.appendChild(h5);
-    divCard1.appendChild(divCardBody);
-    divCardBody.appendChild(ul);
-    divCardBody.appendChild(btnDelete);
-    ul.appendChild(liNombre);
-    ul.appendChild(vaNombre);
-    ul.appendChild(liApellidos);
-    ul.appendChild(vaLastName);
-    ul.appendChild(liCorreo);
-    ul.appendChild(vaEmail);
-    ul.appendChild(liTelefono);
-    ul.appendChild(vaPhone);
-    ul.appendChild(liMatricula);
-    ul.appendChild(vaMatricula);
-
+    
+    tbody.appendChild(tr);
+    tr.appendChild(tdNombre);
+    tr.appendChild(tdApellido);
+    tr.appendChild(tdMatricula);
+    tr.appendChild(tdMateria);
+    tr.appendChild(tdNota);
+    tr.appendChild(btnDelete);
+    tdNombre.appendChild(vaNombre);
+    tdApellido.appendChild(vaLastName);
+    tdMatricula.appendChild(vaMatricula);
+    tdMateria.appendChild(vaMateria);
+    tdNota.appendChild(vaNota);
+    
     
 
-    mainContainer.appendChild(divCol);
-
-    Clear();
-
     toastr.success("La información ha sido guardada e impresa correctamente.", "¡Felicitaciones!", {timeOut: 3000});
+
 
 
   } else {
@@ -154,13 +128,13 @@ function Clear() {
   inputMatricula.classList.remove("input-error");
   inputMatricula.classList.remove("input-success");
   
-  inputPhone.value = "";
-  inputPhone.classList.remove("input-error");
-  inputPhone.classList.remove("input-success");
+  inputMateria.value = "";
+  inputMateria.classList.remove("input-error");
+  inputMateria.classList.remove("input-success");
 
-  inputEmail.value = "";
-  inputEmail.classList.remove("input-error");
-  inputEmail.classList.remove("input-success");
+  inputNota.value = "";
+  inputNota.classList.remove("input-error");
+  inputNota.classList.remove("input-success");
 
   toastr.warning("Se han limpiado los campos", {timeOut: 2000});
   
@@ -173,15 +147,15 @@ function Validate() {
   const valueName = inputName.value;
   const valueLastName = inputLastName.value;
   const valueMatricula = inputMatricula.value;
-  const valuePhone = inputPhone.value;
-  const valueEmail = inputEmail.value;
+  const valueMateria = inputMateria.value;
+  const valueNota = inputNota.value;
   
   //Regular Expressions validation
   let firstnameOK = RegExpFirstName.test(valueName);
   let lastnameOK = RegExpLastName.test(valueLastName);
   let matriculaOK = RegExpMatricula.test(valueMatricula);
-  let phoneOK = RegExpPhone.test(valuePhone);
-  let emailOK = RegExpEmail.test(valueEmail);
+  let materiaOK = RegExpMateria.test(valueMateria);
+  let notaOK = RegExpNota.test(valueNota);
 
   
 
@@ -222,27 +196,27 @@ function Validate() {
 
 
 
-  if (valuePhone == "" || valuePhone == null || valuePhone == undefined || phoneOK === false) {
+  if (valueMateria == "" || valueMateria == null || valueMateria == undefined || materiaOK === false) {
     isValid = false;
-    toastr.error("Formato requerido:(###)-###-####", "!!!TELÉFONO VACÍO O INVÁLIDO!!!", {timeOut: 4000});
-    inputPhone.classList.add("input-error");
-    inputPhone.classList.remove("input-success");
+    toastr.error("No se aceptan caracteres especiales.", "!!!MATERIA VACÍA O INVÁLIDA!!!", {timeOut: 4000});
+    inputMateria.classList.add("input-error");
+    inputMateria.classList.remove("input-success");
     
   } else{
-    inputPhone.classList.remove("input-error");
-    inputPhone.classList.add("input-success");
+    inputMateria.classList.remove("input-error");
+    inputMateria.classList.add("input-success");
   }
   
 
-  if (valueEmail == "" || valueEmail == null || valueEmail == undefined || emailOK === false) {
+  if (valueNota == "" || valueNota == null || valueNota == undefined || notaOK === false) {
     isValid = false;
-    toastr.error("Formato requerido: #@gmail.com", "!!!CORREO VACÍO O INVÁLIDO!!!", {timeOut: 4000});
-    inputEmail.classList.add("input-error");
-    inputEmail.classList.remove("input-success");
+    toastr.error("Valores del 0 al 100", "!!!NOTA VACÍA O INVÁLIDA!!!", {timeOut: 4000});
+    inputNota.classList.add("input-error");
+    inputNota.classList.remove("input-success");
     
   } else{
-    inputEmail.classList.remove("input-error");
-    inputEmail.classList.add("input-success");
+    inputNota.classList.remove("input-error");
+    inputNota.classList.add("input-success");
   }
 
   
